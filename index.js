@@ -27,9 +27,9 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
- * 
+ *    counter() is a callback function, counterMaker() is a higher-order. in the second example counter2, count is a global variable and it won't reset to 0 each time.
  * 2. Which of the two uses a closure? How can you tell?
- * 
+ *  counter1
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  *
 */
@@ -56,9 +56,9 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(max){
+      return Math.floor(Math.random() * Math.floor(max))
 
-    /*Code Here*/
 
 }
 
@@ -76,12 +76,29 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(callback, numInnings) {
+  const score = {
+    "Home": 0,
+    "Away": 0
+  }
+  let homeTeamBats = true;
 
-  /*Code Here*/
+  for (let i = 0; i < numInnings*2; i++) {
+    let inningScore = inning(3);
+    if (homeTeamBats) {
+      // console.log("Home team scored " + inningScore)
+      score.Home += inningScore;
+    } else {
+      // console.log("Away team scored " + inningScore)
+      score.Away += inningScore;
+    }
+    homeTeamBats = !homeTeamBats;
+  }
+  console.log(score);
+  return score;
 
 }
-
+finalScore(inning, 9)
 /* Task 4: 
 
 Create a function called `scoreboard` that accepts the following parameters: 
